@@ -1,7 +1,8 @@
 name: Locale Updater
 
 on:
-  push:
+  pull_request:
+#  push:
 #    branches: Commenting out for testing
 #      - master
 #      - main
@@ -44,10 +45,23 @@ jobs:
         python -m pip install --upgrade pip wheel setuptools
         pip install -e .[dev]
 
+    - name: Checkout PR
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: gh pr checkout ${{ github.event.pull_request.number }}
+
+
     - name: Run locale
       working-directory: rest_framework_simplejwt
       run: |
         python ../scripts/i18n_updater.py
+
+    - name: Push changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git add .
+        git push
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
@@ -58,6 +72,7 @@ jobs:
         body: "Updated locale files on master branch"
         commit-message: "Update locale files"
         add-paths: rest_framework_simplejwt/locale/**
+
 
     - name: Tell whether locale updated
       run: echo "Locale files updated"
