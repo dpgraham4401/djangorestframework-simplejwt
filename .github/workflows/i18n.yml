@@ -2,12 +2,15 @@ name: Locale Updater
 
 on:
   push:
-    branches:
-      - master
-      - main
+#    branches: Commenting out for testing
+#      - master
+#      - main
 
 jobs:
   locale-updater:
+    permissions:
+      contents: write
+      pull-requests: write
     name: Locale updater
     runs-on: ubuntu-latest
     steps:
@@ -47,7 +50,7 @@ jobs:
         python ../scripts/i18n_updater.py
 
     - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v3
+      uses: peter-evans/create-pull-request@v5
       id: auto-commit-action
       with:
         branch: i18n-auto-update
