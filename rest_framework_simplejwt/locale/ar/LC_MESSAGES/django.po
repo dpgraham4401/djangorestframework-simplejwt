@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-30 00:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+#: authentication.py:89
+msgid "Authorization header must contain two space-delimited values"
+msgstr ""
+
+#: authentication.py:115
+msgid "Given token not valid for any token type"
+msgstr ""
+
+#: authentication.py:127 authentication.py:162
+msgid "Token contained no recognizable user identification"
+msgstr ""
+
+#: authentication.py:132
+msgid "User not found"
+msgstr ""
+
+#: authentication.py:135
+msgid "User is inactive"
+msgstr ""
+
+#: authentication.py:142
+msgid "The user's password has been changed."
+msgstr ""
+
+#: backends.py:69
+msgid "Unrecognized algorithm type '{}'"
+msgstr ""
+
+#: backends.py:75
+msgid "You must have cryptography installed to use {}."
+msgstr ""
+
+#: backends.py:90
+msgid ""
+"Unrecognized type '{}', 'leeway' must be of type int, float or timedelta."
+msgstr ""
+
+#: backends.py:104 backends.py:154 exceptions.py:47 tokens.py:58
+msgid "Token is invalid or expired"
+msgstr ""
+
+#: backends.py:152
+msgid "Invalid algorithm specified"
+msgstr ""
+
+#: serializers.py:35
+msgid "No active account found with the given credentials"
+msgstr ""
+
+#: settings.py:73
+msgid ""
+"The '{}' setting has been removed. Please refer to '{}' for available "
+"settings."
+msgstr ""
+
+#: token_blacklist/admin.py:79
+msgid "jti"
+msgstr ""
+
+#: token_blacklist/admin.py:85
+msgid "user"
+msgstr ""
+
+#: token_blacklist/admin.py:91
+msgid "created at"
+msgstr ""
+
+#: token_blacklist/admin.py:97
+msgid "expires at"
+msgstr ""
+
+#: token_blacklist/apps.py:7
+msgid "Token Blacklist"
+msgstr ""
+
+#: tokens.py:44
+msgid "Cannot create token with no type or lifetime"
+msgstr ""
+
+#: tokens.py:116
+msgid "Token has no id"
+msgstr ""
+
+#: tokens.py:128
+msgid "Token has no type"
+msgstr ""
+
+#: tokens.py:131
+msgid "Token has wrong type"
+msgstr ""
+
+#: tokens.py:190
+msgid "Token has no '{}' claim"
+msgstr ""
+
+#: tokens.py:195
+msgid "Token '{}' claim has expired"
+msgstr ""
+
+#: tokens.py:257
+msgid "Token is blacklisted"
+msgstr ""
