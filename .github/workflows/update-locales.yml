@@ -1,9 +1,9 @@
 name: Comment on the pull request
 
-# read-write repo token
-# access to secrets
+# If a PR is opened where locale files need to be updated, this workflow will run
 on:
   workflow_run:
+    # Note this file must be in GitHub's default branch
     workflows: ["Check locale files"]
     types:
       - completed
@@ -15,26 +15,33 @@ jobs:
       github.event.workflow_run.event == 'pull_request' &&
       github.event.workflow_run.conclusion == 'success'
     steps:
-      - name: 'Download artifact'
-        uses: actions/github-script@v3.1.0
+      - name: Download PR artifact II
+        uses: actions/download-artifact@v4
         with:
-          script: |
-            var artifacts = await github.actions.listWorkflowRunArtifacts({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               run_id: ${{github.event.workflow_run.id }},
-            });
-            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "pr"
-            })[0];
-            var download = await github.actions.downloadArtifact({
-               owner: context.repo.owner,
-               repo: context.repo.repo,
-               artifact_id: matchArtifact.id,
-               archive_format: 'zip',
-            });
-            var fs = require('fs');
-            fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
+          name: pr
+
+      - run: ls -l
+
+#      - name: 'Download PR artifact'
+#        uses: actions/github-script@v3.1.0
+#        with:
+#          script: |
+#            var artifacts = await github.actions.listWorkflowRunArtifacts({
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               run_id: ${{github.event.workflow_run.id }},
+#            });
+#            var matchArtifact = artifacts.data.artifacts.filter((artifact) => {
+#              return artifact.name == "pr"
+#            })[0];
+#            var download = await github.actions.downloadArtifact({
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               artifact_id: matchArtifact.id,
+#               archive_format: 'zip',
+#            });
+#            var fs = require('fs');
+#            fs.writeFileSync('${{github.workspace}}/pr.zip', Buffer.from(download.data));
       - run: unzip pr.zip
 
       - name: 'Comment on PR'
@@ -48,5 +55,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: issue_number,
-              body: 'Everything is OK. Thank you for the PR!'
+              body: 'Locale files need to be updated. Run the `i18n_updater.py` script and commit the changes.'
             });
