@@ -1,10 +1,14 @@
-name: Check locale files
+name: Update locale files
 
-# read-only repo token
-# no access to secrets
-# https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
 on:
-  pull_request:
+  push:
+    branches:
+      - locale_auto_update
+
+
+permissions:
+  pull-requests: write
+  contents: read
 
 jobs:
   locale-updater:
@@ -25,7 +29,8 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.9'
-        # Note: do not cache dependencies to prevent cache poisoned
+        cache: 'pip'
+        cache-dependency-path: setup.py
 
     - name: Install dependencies
       run: |
@@ -38,24 +43,26 @@ jobs:
       run: |
         python ../scripts/i18n_updater.py
 
-    - name: Save PR number
-      run: |
-        mkdir -p ./pr
-        echo "${{ github.event.number }}" > ./pr/NR
-
-    - name: Upload PR number
-      uses: actions/upload-artifact@v4
-      with:
-        name: pr
-        path: ./pr
-        overwrite: true
-
-#    - name: update Pull Request
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#    - name: Save PR number
 #      run: |
-#        git config --global user.name 'github-actions[bot]'
-#        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-#        git add rest_framework_simplejwt/locale/**
-#        git commit -m "Update locale files"
-#        git push
+#        mkdir -p ./pr
+#        echo "${{ github.event.number }}" > ./pr/NR
+#
+#    - name: Upload PR number
+#      uses: actions/upload-artifact@v4
+#      with:
+#        name: pr
+#        path: ./pr
+#        overwrite: true
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      id: auto-commit-action
+      with:
+        branch: i18n-auto-update
+        title: "[i18n] Update"
+        body: "Updated locale files on master branch"
+        commit_message: "Update locale files"
+        commit-message: "Update locale files"
+        add-paths: rest_framework_simplejwt/locale/**
+
