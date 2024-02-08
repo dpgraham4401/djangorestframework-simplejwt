@@ -5,7 +5,7 @@ on:
 
 jobs:
   locale-updater:
-    if: github.repository === 'dpgraham4401/django-rest-framework-simplejwt'
+    if: github.repository == 'dpgraham4401/django-rest-framework-simplejwt'
     name: Locale updater
     runs-on: ubuntu-latest
     permissions:
