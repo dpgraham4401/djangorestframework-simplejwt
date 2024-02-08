@@ -1,13 +1,10 @@
-name: Locale Updater
+name: Check locale files
 
+# read-only repo token
+# no access to secrets
+# https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
 on:
-  # See https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request_target
-  pull_request_target:
-
-
-permissions:
-  contents: write
-  pull-requests: write
+  pull_request:
 
 jobs:
   locale-updater:
@@ -15,6 +12,7 @@ jobs:
     name: Locale updater
     runs-on: ubuntu-latest
     steps:
+
     - name: Checkout Repository
       uses: actions/checkout@v4
 
@@ -40,12 +38,23 @@ jobs:
       run: |
         python ../scripts/i18n_updater.py
 
-    - name: update Pull Request
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Save PR number
       run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add rest_framework_simplejwt/locale/**
-        git commit -m "Update locale files"
-        git push
+        mkdir -p ./pr
+        echo "${{ github.event.number }}" > ./pr/NR
+
+    - name: Upload PR number
+      uses: actions/upload-artifact@v2
+      with:
+        name: pr
+        path: ./pr
+
+#    - name: update Pull Request
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      run: |
+#        git config --global user.name 'github-actions[bot]'
+#        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+#        git add rest_framework_simplejwt/locale/**
+#        git commit -m "Update locale files"
+#        git push
