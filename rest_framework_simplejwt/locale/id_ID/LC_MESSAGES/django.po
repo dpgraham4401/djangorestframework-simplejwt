@@ -54,7 +54,7 @@ msgid ""
 msgstr ""
 "Tipe '{}' tidak dikenali, 'leeway' harus bertipe int, float, atau timedelta."
 
-#: backends.py:104 backends.py:154 exceptions.py:47 tokens.py:58
+#: backends.py:104 backends.py:154 exceptions.py:47 tokens.py:60
 msgid "Token is invalid or expired"
 msgstr "Token tidak valid atau kedaluwarsa"
 
@@ -94,30 +94,30 @@ msgstr "kedaluwarsa pada"
 msgid "Token Blacklist"
 msgstr "Daftar Hitam Token"
 
-#: tokens.py:44
+#: tokens.py:46
 msgid "Cannot create token with no type or lifetime"
 msgstr "Tidak dapat membuat token tanpa tipe atau masa pakai"
 
-#: tokens.py:116
+#: tokens.py:118
 msgid "Token has no id"
 msgstr "Token tidak memiliki id"
 
-#: tokens.py:128
+#: tokens.py:130
 msgid "Token has no type"
 msgstr "Token tidak memiliki tipe"
 
-#: tokens.py:131
+#: tokens.py:133
 msgid "Token has wrong type"
 msgstr "Jenis token salah"
 
-#: tokens.py:190
+#: tokens.py:192
 msgid "Token has no '{}' claim"
 msgstr "Token tidak memiliki klaim '{}'"
 
-#: tokens.py:195
+#: tokens.py:197
 msgid "Token '{}' claim has expired"
 msgstr "Klaim token '{}' telah kedaluwarsa"
 
-#: tokens.py:257
+#: tokens.py:259
 msgid "Token is blacklisted"
 msgstr "Token masuk daftar hitam"
