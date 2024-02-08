@@ -3,8 +3,8 @@ name: Update locale files
 on:
   push:
     branches:
-      - main
-      - master
+#      - main
+#      - master
 
 permissions:
   pull-requests: write
@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   locale-updater:
-    if: github.repository == 'jazzband/djangorestframework-simplejwt'
+#    if: github.repository == 'jazzband/djangorestframework-simplejwt'
     name: Locale updater
     runs-on: ubuntu-latest
     steps:
