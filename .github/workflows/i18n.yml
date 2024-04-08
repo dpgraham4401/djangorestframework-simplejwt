@@ -2,9 +2,9 @@ name: Update locale files
 
 on:
   push:
-    branches:
-      - main
-      - master
+    # branches:
+    #   - main
+    #   - master
 
 permissions:
   pull-requests: write
